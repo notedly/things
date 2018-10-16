@@ -1,0 +1,12 @@
+# Ignore sass-cache files.
+.sass-cache/
+
+node_modules
+app
+*~
+.DS_store
+.gulp-cache
+html_build
+js_min
+
+html/scss/sprite/

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+// 초기화
+@import "./common/reset";
+
+// 변수
+@import "./common/variables";
+@import "./common/mixins";
+
+//스프라이트 이미지
+@import "./sprite/_icons-sprite";
+
+// 헤더
+@import "./ui/header";
+
+// 메인
+@import "./ui/main";
