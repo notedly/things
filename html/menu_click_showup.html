@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="./css/style.css">
+	<script src = './js/menu_click_showup.js'></script>
+</head>
+<body>
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat id aliquam, repudiandae nam facilis officiis, ipsum obcaecati aperiam exercitationem consequatur et inventore iste, accusantium sit consectetur? Quas voluptate necessitatibus, tempore, voluptatum vitae quaerat architecto quasi quibusdam illum molestias officiis, ratione dolorem consequuntur ducimus inventore natus distinctio? Quibusdam tenetur sunt quaerat adipisci est, non repellat quas ex repudiandae officia possimus? Blanditiis quaerat dolorum non vero cupiditate eligendi labore saepe maxime eum, itaque repellat, laboriosam hic aperiam veniam ratione! Doloremque, dolore praesentium omnis! Neque nobis, et molestias rem assumenda inventore maiores ut ipsa. Quidem voluptatibus consectetur nemo debitis ad nisi facere maxime!</p>
+	<p>Cupiditate a voluptate optio ad facere inventore eius impedit autem saepe fugit labore, non, perferendis itaque mollitia quo dicta nulla architecto eveniet culpa voluptates sapiente incidunt iure dolore! Dolor quae, ex cum pariatur laboriosam inventore a in fugiat eius, eos odit nesciunt, impedit temporibus, quasi. Quod quia, ad optio saepe aperiam et consequatur debitis nihil, molestias adipisci natus inventore dignissimos delectus ea explicabo! Sint eos nostrum, corrupti harum dolor sapiente eligendi laboriosam cupiditate cum asperiores ipsa dignissimos quibusdam, beatae ratione, laborum reiciendis. Expedita similique perspiciatis, necessitatibus, eveniet neque et ullam molestias ad esse, vitae recusandae natus aliquam odit quam consequatur!</p>
+	<p>Molestiae unde hic aperiam sint omnis modi eaque quibusdam nostrum ducimus. Eum rerum fugiat earum quo atque similique aliquid, distinctio eligendi aut a sapiente hic ut ipsa, fuga molestiae minus mollitia ex. Ipsa ad, ipsum aperiam mollitia quaerat dolorem eum, tempora atque facere totam doloribus eius, voluptate sit dolores minus autem. Ullam, ut consequuntur itaque ipsam fugit porro quod cumque libero. Corporis sunt officia beatae! Ex velit consequuntur eum ad recusandae incidunt reprehenderit officiis tenetur temporibus architecto ipsa, perspiciatis, repellendus ipsam consequatur suscipit culpa quaerat vero cum ab rem placeat cumque est! Ullam corporis enim maxime eaque odit eveniet sapiente.</p>
+	<p>Vitae nemo dicta in vel ducimus! Nihil quasi adipisci deleniti temporibus veritatis, cupiditate libero cumque! Quibusdam possimus aliquid dolores, cum delectus iusto tenetur quas omnis. Accusantium accusamus alias soluta debitis autem qui aspernatur labore necessitatibus exercitationem ratione, quia unde iste hic, libero optio. Illum possimus non omnis, sapiente blanditiis facere eaque, ut distinctio explicabo ratione, iste ducimus in totam rem minus tempore accusamus ullam aut beatae, inventore laborum. Reprehenderit pariatur, dolorem, suscipit iusto adipisci quod laborum expedita fuga eum provident alias modi in ratione unde corporis quisquam aliquam, a labore debitis? Laudantium soluta, in, debitis ab facere omnis illo quaerat.</p>
+	<p>Repellendus ab aliquam amet cupiditate nobis qui explicabo animi non. Sequi distinctio facere pariatur earum commodi, vero at dignissimos sed rerum, esse odio a, hic sapiente eos nemo fuga praesentium error omnis aspernatur officia deserunt labore facilis voluptatum? Quas maxime nisi, delectus, eligendi nulla sit dolorum at consequatur. Totam illo suscipit, tempore, ea mollitia doloremque. Officia dolorum, veritatis dolores, sed nulla repudiandae beatae ullam perferendis a! Cum sit eveniet ullam laborum iusto laboriosam dolorum, consequatur nisi consequuntur. Illo, nostrum. Sed iusto doloribus ipsam porro enim nam recusandae, deserunt minus? Est natus reiciendis ipsa iure placeat maiores, quia similique exercitationem itaque.</p>
+
+	<div class="wrapper">
+
+		<a href="#;" class="btn_circle">
+			<span class="ico">결제</span>
+		</a>
+
+		<div class="bg"></div>
+
+		<div class="expand_menu_approv">
+
+			<div class="item">
+				<button type="button" class="btn_expand_hide"><span class="circle"><i class="icon_hide">닫기</i></span></button>
+			</div>
+
+			<div class="item">
+				<a href="#;">
+					<span class="circle">
+						<i class="sp_icons"></i>
+						<em>8</em>
+					</span>
+					<span class="txt">전자결재</span>
+				</a>
+			</div>
+
+			<div class="item">
+				<a href="#;">
+					<span class="circle">
+						<i class="sp_icons"></i>
+						<em>8</em>
+					</span>
+					<span class="txt">보고서</span>
+				</a>
+			</div>
+
+			<div class="item">
+				<a href="#;">
+					<span class="circle">
+						<i class="sp_icons"></i>
+						<em>8</em>
+					</span>
+					<span class="txt">점포장 통합결재</span>
+				</a>
+			</div>
+
+		</div>
+		<!-- end of expand_menu_approv -->
+
+	</div>
+	<script>
+		window.addEventListener('load', function(){
+			let btn = document.querySelector('.btn_circle') ;
+			let wrapper = document.querySelector('.wrapper') ;
+			let btnClose = document.querySelector('.btn_expand_hide') ;
+			btn.addEventListener('click', function(){
+				wrapper.classList.add('expand') ;
+			}) ;
+			btnClose.addEventListener('click', function(){
+				wrapper.classList.remove('expand') ;
+			})
+		})
+	</script>
+
+</body>
+</html>
