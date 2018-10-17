@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="./css/style.css">
+	<script src = './js/libs/jquery-1.11.2.min.js'></script>
+	<script src = './js/input_box_state.js'></script>
+</head>
+<body>
+
+	<h1>input box</h1>
+
+	<!--
+	1. state_done : 작성 완료
+	<div class="box_txt state_done"></div>
+	*************************************
+	2. state_on : 작성 중
+	<div class="box_txt state_on"></div>
+	*************************************
+	3. state_get : 불러온 정보
+	<div class="box_txt state_get"></div>
+	*************************************
+	3. state_disable : 비활성화 ( 활성화시 클래스와 readonly 삭제 )
+	<div class="box_txt state_disable"></div>
+	 -->
+
+	 <!--
+		state_on 일 경우
+		label 삭제 , 스타일 반영
+
+		state_done 일 경우
+		label 삭제 , 스타일 반영
+
+	  -->
+
+	<div class="input_box_wrap">
+		<ul>
+			<li>
+				<div class="box_ip">
+					<label for="t_name" class="lab_txt">이름</label>
+					<input type="text" class="ip_default" id="t_name">
+				</div>
+			</li>
+			<li>
+				<div class="box_ip">
+					<label for="t_addr" class="lab_txt">주소</label>
+					<input type="text" class="ip_default" id="t_addr">
+				</div>
+			</li>
+			<li>
+				<div class="box_ip">
+					<label for="t_age" class="lab_txt">나이</label>
+					<input type="text" class="ip_default" id="t_age">
+				</div>
+			</li>
+			<li>
+				<div class="box_ip">
+					<label for="t_tel" class="lab_txt">전화번호</label>
+					<input type="text" class="ip_default" id="t_tel">
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>
