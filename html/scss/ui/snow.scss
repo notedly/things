@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+body{
+	height:100%;
+	&.snow{
+		background-color: #333;
+		overflow: hidden;
+	}
+}
+.opt {
+  position: fixed;
+  left: 0; top: 0;
+  background-color: rgba( #000 , 0.2 );
+  padding: 10px; ;
+  button{
+  	background-color: #fff;
+  	color:#000;
+  }
+  > * {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
