@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+.wrap_btn{
+	padding:200px 0;
+	text-align: center;
+}
+
+.btn{
+	$speed : .5s;
+	$default-color : #333;
+	position: relative;
+	display: inline-block;
+	padding:1.5em 3em;
+	border:1px solid $default-color;
+	color:$default-color;
+	overflow: hidden;
+	font-weight: bold;
+	&.ani_default{
+		transition:color $speed;
+		&:before{
+			content:"";
+			display: block;
+			position: absolute;
+			left:0;
+			bottom:100%;
+			width:100%;
+			height:100%;
+			background-color: $default-color;
+			transition:bottom $speed;
+			z-index: -1;
+		}
+		&:hover{
+			color:#fff;
+			&:before{
+				bottom:0;
+			}
+		}
+	}
+	&.ani_twave{
+		&:after{
+			content:attr( data-menu-name );
+			position: absolute;
+			left:50%;
+			top:50%;
+			transform:translate(-50%, -50%);
+			opacity: 0;
+		}
+	}
+/* 	&.wave{
+	$speed : .6s;
+	$easing : cubic-bezier(0.550, 0.055, 0.675, 0.190);
+	transition:all $speed $easing;
+	overflow: visible;
+	// overflow: hidden;
+	&:before{
+		content: "";
+		display: block;
+		position: absolute;
+		left:50%;
+		bottom:100%;
+		background-color: #333;
+		width:150px;
+		height:150px;
+		transform: scale(1) translateX(-50%);
+		transition:all $speed;
+		border-radius: 50%;
+	}
+	&:hover{
+		&:before{
+			// top:0;
+			// border-radius: 0;
+			animation-name: wave;
+			animation-duration: $speed;
+			animation-fill-mode: forwards;
+		}
+	}
+} */
+}
+
+@keyframes wave {
+	0%{
+		bottom:100%;
+		border-radius:50%;
+	}
+	40%{
+		// border-radius:50%;
+	}
+	100%{
+		bottom:0;
+		// border-radius:0;
+	}
+}
