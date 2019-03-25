@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+@import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
+
 // 초기화
 @import "./common/reset";
 
@@ -12,3 +15,12 @@
 
 @import "./ui/menu_click_showup";
 @import "./ui/input_box_state";
+
+
+
+
+.storeWrap{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:18px;
+    line-height: 1.8;
+}
