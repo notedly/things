@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
+@import "https://fonts.googleapis.com/css?family=Noto+Sans+KR";
 
 // 초기화
 @import "./common/reset";
@@ -23,4 +23,55 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-size:18px;
     line-height: 1.8;
+    max-width:700px;
+    margin:0 auto;
+    padding:50px;
+    h1{
+    	color:#333;
+    	position: relative;
+    	top:5px;
+    	line-height: 1;
+    	font-weight: 600;
+    	text-align: left;
+    	font-style: italic;
+    	font-size:30px;
+    	span{
+    		font-weight: normal;
+    	}
+    }
+    ul {
+    	padding:20px;
+    	border:10px solid #eee;
+    	li{
+			text-align: center;
+			font-size:24px;
+			line-height: 2.2;
+			color:#535c68;
+			i{
+				margin-right: 15px;
+				font-size:26px;
+				vertical-align: middle;
+				position: relative;
+				top:-2px;
+				color:#535c68;
+			}
+			strong{
+				position: relative;
+				font-weight: 600;
+				color:#eb4d4b;
+				&:before{
+					content:"";
+					display: block;
+					position: absolute;
+					left:0;
+					bottom:5px;
+					width:100%;
+					height:15px;
+					background-color: #f7e600 ;
+					opacity: 0.5;
+					z-index:-1;
+				}
+			}
+    	}
+    }
 }
