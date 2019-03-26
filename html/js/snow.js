@@ -63,6 +63,7 @@ class Particle{
 	}	// end of draw 
 
 	update = ( mapObj ) => {
+		console.log( 'ddddddddddddddddddddddddddd' , mapObj ) ;
 		mapObj.forEach( ( val, key ) => {
 			switch( key ) {
 				case 'fallingDown' : 
@@ -173,29 +174,44 @@ class WinterSnow {
 
 	}	// end of move
 
-	changeVariance = ( num ) => {
-		console.log( 'changeVariance: ', num ) ;
+	changeUpdate = ( num, name ) => {
+		let { props } = this 
+		,	type = name
+		,	i = 0
+		, 	len = props.len ;
 
-		let { props } = this; 
-		let i = 0, len = props.len ;
 		for( ; i < len ; i += 1 ) {
 			let map = new Map ;
-			map.set( 'windVariance' , +num ) ;
+			map.set( type , +num ) ;
 			props.particles[i].update( map ) ;
 		}
+	}	// end of changeUpdate
 
-	}	// end of changeVariance
+	// changeVariance = ( num ) => {
+	// 	console.log( 'changeVariance: ', num ) ;
 
-	changeSpeed = ( num ) => {
-		console.log( 'changeSpeed: ', num ) ;
-		let { props } = this; 
-		let i = 0, len = props.len ;
-		for( ; i < len ; i += 1 ) {
-			let map = new Map ;
-			map.set( 'speed' , +num ) ;
-			props.particles[i].update( map ) ;
-		}
-	}	// end of changeSpeed
+	// 	let { props } = this; 
+	// 	let i = 0, len = props.len ;
+	// 	for( ; i < len ; i += 1 ) {
+	// 		let map = new Map ;
+	// 		map.set( 'windVariance' , +num ) ;
+	// 		props.particles[i].update( map ) ;
+	// 	}
+
+	// }	// end of changeVariance
+
+	// changeSpeed = ( num ) => {
+	// 	console.log( 'changeSpeed: ', num ) ;
+		
+	// 	let { props } = this; 
+	// 	let i = 0, len = props.len ;
+	// 	for( ; i < len ; i += 1 ) {
+	// 		let map = new Map ;
+	// 		map.set( 'speed' , +num ) ;
+	// 		props.particles[i].update( map ) ;
+	// 	}
+
+	// }	// end of changeSpeed
 
 	stop = () => {
 		this.stopBln = true; 
@@ -224,11 +240,13 @@ window.addEventListener('load', () => {
 	}) ;
 
 	document.querySelector( '.variance' ).addEventListener( 'input' , ( e ) => {
-		winterSnow.changeVariance( e.target.value ) ;
+		// winterSnow.changeVariance( e.target.value ) ;
+		winterSnow.changeUpdate( e.target.value , 'windVariance' ) ;
 	}) ;
 
 	document.querySelector( '.speed' ).addEventListener( 'input' , ( e ) => {
-		winterSnow.changeSpeed( e.target.value ) ;
+		// winterSnow.changeSpeed( e.target.value ) ;
+		winterSnow.changeUpdate( e.target.value , 'speed' ) ;
 	}) ;
 
 	document.querySelector( '.stopBtn' ).addEventListener( 'click' , () => {
