@@ -1,20 +1,12 @@
-
-/*
-작업 순서
-WinterSnow 클래스 생성
-- 각종 변수 생성 및 저장
-- add : 캔버스 생성
-- make : 눈 개별 make -> particle 클래스생성
-- 눈 그리기!
-- 눈 움직이기( 한번 움직이게 )
-- FizzBuzz 알고리즘을 사용하여 몇몇 눈은 다르게 표현하는 코드 작성
-- 눈 움직이기( 반복적으로 계속 ) 
-- 컨트롤 타워 생성
-*/
-
 let rdm = ( min = 0 , max = 1 ) =>{
 	return min + ( max - min ) * Math.random() ;
 }	// end of rdm
+
+class MakeStyle {
+	constructor(){
+		console.log( 'MakeStyle in' ) ;
+	}
+}	// end of MakeStyle
 
 class Particle{
 	constructor( ...args ){
@@ -27,6 +19,12 @@ class Particle{
 
 		/**
 		 * 사이즈, 투명도, 회전, x, y
+		 * size
+		 * duration
+		 * alpha
+		 * rotate
+		 * x
+		 * y
 		 */
 		this.size = rdm( 5, 10 ) ;
 		this.duration = this.size * this.speed * 0.1 ;
@@ -60,13 +58,12 @@ class Particle{
 		this.ctx.globalAlpha = this.alpha ;
 		this.ctx.drawImage( this.img, -this.size / 2, -this.size / 2, this.size, this.size );
 		this.ctx.restore() ;
-	}	// end of draw 
+	}	// end of draw
 
 	update = ( mapObj ) => {
-		console.log( 'ddddddddddddddddddddddddddd' , mapObj ) ;
 		mapObj.forEach( ( val, key ) => {
 			switch( key ) {
-				case 'fallingDown' : 
+				case 'fallingDown' :
 					let idx = val ;
 					if ( idx % 100 === 0 ) {
 						this.y = -rdm( this.size * 10 , this.size * 60 ) ;
@@ -76,76 +73,40 @@ class Particle{
 						this.y = -rdm( this.size * 10 , this.size * 100 ) ;
 					}
 					break ;
-				case 'windVariance' :
+				case 'wind' :
 					this.windVariance = val ;
 					this.wind = this.ctx.canvas.height * val / 2 ;
 					break;
 				case 'speed' :
 					this.speed = val ;
-					this.duration = this.size * this.speed * 0.1 ; 
+					this.duration = this.size * this.speed * 0.1 ;
 					if ( this.idx % 100 === 0 ) {
 						this.duration = this.duration / 4 ;
 					} else if ( this.idx % 10 === 0 ) {
 						this.duration = this.duration / 2.5 ;
 					}
 					break;
-				default : 
+				default :
 			}
 		})
 	}	// end of update
 
 }
 
-class WinterSnow {
+class Controller {
+	
 	constructor(){
-		let ctx = document.createElement('canvas').getContext('2d') ;
-		let { canvas } = ctx ;
-
-		let windVariance = 1.5 ;
-
 		this.bln = false ;
 		this.stopBln = false ;
-
-		this.props = {
-			ctx : ctx ,
-			len : 100 ,
-			w : canvas.width = window.innerWidth ,
-			h : canvas.height = window.innerHeight ,
-			wind : canvas.height * windVariance / 2 ,
-			windVariance : windVariance ,
-			speed : 1 ,
-			particles : [] ,
-		}
-
-		window.addEventListener('resize', () => {
-			let { props } = this ;
-			console.log( 'resize in' ) ;
-			props.w = canvas.width = window.innerWidth ;
-			props.h = canvas.height = window.innerHeight ;
-		}) ;
-
-	}	// end of constructor 
-
-	add = ( elem ) => {
-		elem.appendChild( this.props.ctx.canvas ) ;
-	}	// end of add 
-
-	make = () => {
-		console.log( 'len : ', this.props.len) ;
-		let { props } = this; 
-		let i = 0, len = props.len ;
-		for( ; i < len ; i += 1 ) {
-			props.particles[i] = new Particle( i , props ) ;
-		}
-	}	// end of make 
+	}
 	
-	draw = () => {
+	start = () => {
 		if( this.bln ) return ;
 		this.bln = true ;
 		this.stopBln = false;
 		this.move() ;
-	}	// end of draw
-	
+	}	// end of start
+
 	move = () => {
 		let { props } = this ;
 		props.ctx.clearRect( 0, 0, props.w, props.h ) ;
@@ -155,7 +116,6 @@ class WinterSnow {
 			snow.rotate += Math.random() * 0.045 ;
 			snow.x += ( snow.size * 0.1 ) * snow.duration + snow.windVariance ;
 			snow.y += snow.size * snow.duration ;
-
 			if( snow.y > props.h ) {
 				if( !this.stopBln ){
 					snow.x = rdm( -Math.abs(snow.wind) , snow.w + Math.abs( snow.wind) ) ;
@@ -164,57 +124,15 @@ class WinterSnow {
 					snow.update( map ) ;
 				}
 			}
-
 			snow.draw() ;
 		}
-
 		if( this.bln ) {
 			requestAnimationFrame( this.move ) ;
 		}
-
 	}	// end of move
 
-	changeUpdate = ( num, name ) => {
-		let { props } = this 
-		,	type = name
-		,	i = 0
-		, 	len = props.len ;
-
-		for( ; i < len ; i += 1 ) {
-			let map = new Map ;
-			map.set( type , +num ) ;
-			props.particles[i].update( map ) ;
-		}
-	}	// end of changeUpdate
-
-	// changeVariance = ( num ) => {
-	// 	console.log( 'changeVariance: ', num ) ;
-
-	// 	let { props } = this; 
-	// 	let i = 0, len = props.len ;
-	// 	for( ; i < len ; i += 1 ) {
-	// 		let map = new Map ;
-	// 		map.set( 'windVariance' , +num ) ;
-	// 		props.particles[i].update( map ) ;
-	// 	}
-
-	// }	// end of changeVariance
-
-	// changeSpeed = ( num ) => {
-	// 	console.log( 'changeSpeed: ', num ) ;
-		
-	// 	let { props } = this; 
-	// 	let i = 0, len = props.len ;
-	// 	for( ; i < len ; i += 1 ) {
-	// 		let map = new Map ;
-	// 		map.set( 'speed' , +num ) ;
-	// 		props.particles[i].update( map ) ;
-	// 	}
-
-	// }	// end of changeSpeed
-
 	stop = () => {
-		this.stopBln = true; 
+		this.stopBln = true;
 	}	// end of stop
 
 	clear = () => {
@@ -227,36 +145,130 @@ class WinterSnow {
 		}, 10) ;
 	}	// end of clear
 
-}
+	change = ( num, name ) => {
+		let { props } = this
+		,	type = name
+		,	i = 0
+		, 	len = props.len ;
 
+		for( ; i < len ; i += 1 ) {
+			let map = new Map ;
+			map.set( type , +num ) ;
+			props.particles[i].update( map ) ;
+		}
+	}	// end of update
+
+}	// end of Controller
+
+class WinterSnow extends Controller {
+	constructor(){
+		super() ;
+		let ctx = document.createElement('canvas').getContext('2d') ;
+		let { canvas } = ctx ;
+		let windVariance = +document.querySelector('.variance').value || 1.5;
+
+		console.log( this ) ;
+
+		this.props = {
+			ctx : ctx ,
+			len : 100 ,
+			w : canvas.width = window.innerWidth ,
+			h : canvas.height = window.innerHeight ,
+			wind : canvas.height * windVariance / 2 ,
+			windVariance : windVariance ,
+			speed : 1 ,
+			particles : [] ,
+		}
+
+		window.addEventListener( 'resize', this.resize ) ;
+
+	}	// end of constructor
+
+	init = ( args ) => {
+		let { target , len } = args ;
+		this.props.len = len || 100 ;		
+		target.appendChild( this.props.ctx.canvas ) ;
+		this.make() ;
+	}	// end of init
+
+	resize = () => {
+		let { props } = this ;
+		let { canvas } = props.ctx ;
+		props.w = canvas.width = window.innerWidth ;
+		props.h = canvas.height = window.innerHeight ;
+	}	// end of resize
+
+	make = ( opt ) => {
+		let { props } = this;
+		let i = 0, len = props.len ;
+		for( ; i < len ; i += 1 ) {
+			props.particles[i] = new Particle( i , props ) ;
+		}
+	}	// end of make
+
+}	// end of WinterSnow
 
 window.addEventListener('load', () => {
+
 	let winterSnow = new WinterSnow ;
-	winterSnow.add( document.body ) ;
-	winterSnow.make() ;
+	winterSnow.init( { target : document.body, len : 500 } ) ;
 
 	document.querySelector( '.startBtn' ).addEventListener( 'click' , () => {
-		winterSnow.draw() ;
+		winterSnow.start() ;
 	}) ;
 
 	document.querySelector( '.variance' ).addEventListener( 'input' , ( e ) => {
-		// winterSnow.changeVariance( e.target.value ) ;
-		winterSnow.changeUpdate( e.target.value , 'windVariance' ) ;
+		winterSnow.change( e.target.value , 'wind' ) ;
 	}) ;
 
 	document.querySelector( '.speed' ).addEventListener( 'input' , ( e ) => {
-		// winterSnow.changeSpeed( e.target.value ) ;
-		winterSnow.changeUpdate( e.target.value , 'speed' ) ;
+		winterSnow.change( e.target.value , 'speed' ) ;
 	}) ;
 
 	document.querySelector( '.stopBtn' ).addEventListener( 'click' , () => {
-		console.log( 'stop' ) ;
 		winterSnow.stop() ;
 	}) ;
-	
+
 	document.querySelector( '.clearBtn' ).addEventListener( 'click' , () => {
-		console.log( 'clear' ) ;
 		winterSnow.clear() ;
 	}) ;
 
 }) ;
+
+	/*
+		winterSnow.changeUpdate( document.querySelector('.variance') , 'wind' ) ;
+	*/
+/*
+작업 순서
+WinterSnow 클래스 생성
+- 각종 변수 생성 및 저장
+- add : 캔버스 생성
+- make : 눈 개별 make -> particle 클래스생성
+- 눈 그리기!
+- 눈 움직이기( 한번 움직이게 )
+- FizzBuzz 알고리즘을 사용하여 몇몇 눈은 다르게 표현하는 코드 작성
+- 눈 움직이기( 반복적으로 계속 )
+- 컨트롤 타워 생성
+*/
+
+
+/* 
+	리펙토링 계획
+	- 반복되는 코드 최소화 -> 코드 통합
+		- wind, speed 업데이트 코드
+	- type 추가 : rain 
+
+	- 컨트롤러 분리
+
+	성격 별로 분리해보자
+
+	1. 눈을 만드는 클래스
+	2. 속성을 변경하는 클래스
+	3. 속성을 컨트롤 하는 클래스
+		L 2번 (변경 하는 클래스)의 메소드를 상속 받아서 속성을 컨트롤 하는 클래스
+	
+
+	최적화 하라는 것이지 min처리 하라는 것은 아니다.
+	애초에 컨트롤러하고 코어 API하고 분리
+
+*/
